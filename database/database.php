@@ -1,6 +1,6 @@
 <?php
 class Database{
-    private static $dbName = 'cis355' ; 
+    private static $dbName = 'projects' ; 
     private static $dbHost = 'localhost' ;
     private static $dbUsername = 'root';
     private static $dbUserPassword = 'Binboken2001' ;
