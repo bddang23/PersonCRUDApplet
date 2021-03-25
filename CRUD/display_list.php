@@ -10,8 +10,6 @@ require '../database/database.php';
 $pdo = Database::connect();
 
 # display link to "create" form
-echo "<a href='display_create_form.php'>Create</a><br><br>";
-
 echo "<a style='color: green' href='logout.php'>LOGOUT</a> <br> <br>";
 
 # display all records

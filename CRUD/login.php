@@ -35,10 +35,10 @@
             
             //if user typed legit'email combo, set $_SESSION
             if ($result){
-               
+               $password = $_POST['password'];
                $password_hash_db = $result['password_hash'];
                $password_salt_db = $result['password_salt'];
-               $password_hash = MD5($password+ $password_salt_db);
+               $password_hash = MD5($password . $password_salt_db);
                echo strcmp( $password_hash_db,$password_hash );
 
                if(!strcmp($password_hash, $password_hash_db)){
