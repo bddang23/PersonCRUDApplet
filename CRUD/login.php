@@ -1,6 +1,6 @@
 <?php
     session_start();//create $_SESSION supergloabal array
-error_reporting(0);
+    error_reporting(0);
     $errMsg='';
     
     //check login credential
