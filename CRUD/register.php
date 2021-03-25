@@ -9,6 +9,6 @@
     Address 2: <input name='address2' type='text'> </br>
     City: <input name='city' type='text'> </br>
     State: <input name='state' type='text'> </br>
-    Zip Code: <input name='zip_code' type='number'> </br></br> 
+    Zip Code: <input name='zip_code' type='text'> </br></br> 
     <input type="submit" value="Submit">
 </form>

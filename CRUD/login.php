@@ -13,7 +13,6 @@
         
         if($_POST['email']=='admin@admin.com' && $_POST['password']=='admin'){
         $_SESSION['email'] = 'admin@admin.com';
-        echo 'sucessful!';
         header("Location:display_list.php");
         }
         else if($_POST['email']=='user@user.com' && $_POST['password']=='user'){
@@ -39,8 +38,7 @@
                $password_hash_db = $result['password_hash'];
                $password_salt_db = $result['password_salt'];
                $password_hash = MD5($password . $password_salt_db);
-               echo strcmp( $password_hash_db,$password_hash );
-
+              
                if(!strcmp($password_hash, $password_hash_db)){
                    $_SESSION['email'] = $result['email'];
                    header("Location:display_list.php");
