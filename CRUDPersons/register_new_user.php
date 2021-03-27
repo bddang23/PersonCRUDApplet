@@ -3,7 +3,7 @@
 # 1. connect to database
 require '../database/database.php';
 $pdo = Database::connect();
-include_once "layout_header.php";
+
 # 2. check valid email
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -80,6 +80,7 @@ else {
             ));
             # 4. insert the message into the database
             //$pdo->query($sql); # execute the query
+            include_once "layout_header.php";
             echo "<p>Your info has been added. You can now log in</p><br>";
             echo "<a href='login.php'>Back to login page</a>";
         }

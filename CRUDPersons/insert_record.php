@@ -7,7 +7,7 @@ if(!isset($_SESSION['email'])){
 # 1. connect to database
 require '../database/database.php';
 $pdo = Database::connect();
-include_once "layout_header.php";
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 $valPassword = $_POST['valPassword'];
@@ -91,6 +91,7 @@ else {
             ));
             # 4. insert the message into the database
             //$pdo->query($sql); # execute the query
+            include_once "layout_header.php";
             echo "<p>New user has been added</p><br>";
             echo "<a href='display_list.php'>Back to display list</a>";
         }
