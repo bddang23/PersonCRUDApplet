@@ -4,11 +4,10 @@ if(!isset($_SESSION['email'])){
     header("Location:login.php");
 }
 # This process inserts a record. There is no display.
-
 # 1. connect to database
 require '../database/database.php';
 $pdo = Database::connect();
-
+include_once "layout_header.php";
 $email = $_POST['email'];
 $password = $_POST['password'];
 $valPassword = $_POST['valPassword'];

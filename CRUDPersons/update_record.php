@@ -8,7 +8,7 @@ include_once "layout_header.php";
 # 1. connect to database
 require '../database/database.php';
 $pdo = Database::connect();
-
+include_once "layout_header.php";
 # 2. assign user info to a variable
 $email = $_POST['email'];
 $fname = $_POST['fname'];

@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['email'])){
     header("Location:login.php");
 }
-
+include_once "layout_header.php";
 ?>
 
 <h1>Create/add new person</h1>

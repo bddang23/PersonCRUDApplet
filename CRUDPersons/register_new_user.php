@@ -3,6 +3,7 @@
 # 1. connect to database
 require '../database/database.php';
 $pdo = Database::connect();
+include_once "layout_header.php";
 # 2. check valid email
 $email = $_POST['email'];
 $password = $_POST['password'];
