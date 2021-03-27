@@ -16,23 +16,23 @@ $query->execute(Array($id));
 $result = $query->fetch();
 ?>
 
-<h1>Update existing message</h1>
+<h1>Update existing person</h1>
 
 <form method='post' action='update_record.php?id=<?php echo $id ?>'>
     Email:      <input name='email' type='text' value='<?php echo $result['email'];?>'> </br>
     Role:       <?php 
-                        if($_GET['role'] == 'admin'){
-                        $userSelected=" ";
-                        $adminSelected=" ";
+                        $userSelected="";
+                        $adminSelected="";
                         
-                        if ($result['role']=='user')
-                            $userSelected='selected';
-                        else if ($result['role']=='user')
-                            $adminSelected = 'selected';
-                            
+                    if($_GET['role'] == 'admin' && $result['email'] != $_SESSION['email']){
+                            if ($result['role'] =='user')
+                                $userSelected = "selected";
+                            else if ($result['role']=='admin')
+                                $adminSelected = "selected";
+                           
                         echo "<select name='role'> \n
-                        <option value='user' $userSelected >User</option> \n
-                        <option value='admin' $adminSelected>Admin</option> \n
+                        <option value='user' " . $userSelected ." >User</option> \n
+                        <option value='admin' ". $adminSelected .">Admin</option> \n
                         </select> </br>";
                     }
                     else {
