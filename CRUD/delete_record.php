@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['username'])){
+if(!isset($_SESSION['email'])){
     header("Location:login.php");
 }
 
@@ -12,11 +12,11 @@ $pdo = Database::connect();
 
 # 3. assign MySQL query code to a variable
 $id = $_GET['id'];
-$sql = "DELETE FROM messages WHERE id = ?";
+$sql = "DELETE FROM persons WHERE id = ?";
 $query =$pdo->prepare($sql);
 $query->execute(Array($id));
 
 # 4. insert the message into the database
-$pdo->query($sql); # execute the query
-echo "<p>Your message has been deleted</p><br>";
+//$pdo->query($sql); # execute the query
+echo "<p>Your person has been deleted</p><br>";
 echo "<a href='display_list.php'>Back to list</a>";

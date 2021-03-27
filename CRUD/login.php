@@ -13,13 +13,16 @@
         
         if($_POST['email']=='admin@admin.com' && $_POST['password']=='admin'){
         $_SESSION['email'] = 'admin@admin.com';
+        $_POST['role']='admin';
         header("Location:display_list.php");
         }
+        
         else if($_POST['email']=='user@user.com' && $_POST['password']=='user'){
             $_SESSION['email'] = 'user@user.com';
-            
+            $_POST['role']='user';
             header("Location:display_list.php");
-            }
+        }
+
         else{
             //check database for legit'email/pass
             require '../database/database.php';
@@ -41,13 +44,13 @@
               
                if(!strcmp($password_hash, $password_hash_db)){
                    $_SESSION['email'] = $result['email'];
+                   
                    header("Location:display_list.php");
                }
                else {
                    $errMsg = "Login Failed: Wrong email or password";
                }
-               
-               
+
             }
             else{
             $errMsg = "Login Failed: Wrong email or password";
