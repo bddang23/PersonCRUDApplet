@@ -3,14 +3,14 @@ session_start();
 if(!isset($_SESSION['email'])){
     header("Location:login.php");
 }
-# This process inserts a record. There is no display.
-
+# This process updates a record. There is no display.
+include_once "layout_header.php";
 # 1. connect to database
 require '../database/database.php';
 $pdo = Database::connect();
 
+# 2. assign user info to a variable
 $email = $_POST['email'];
-$role = $_POST['role'];
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
 $phone = $_POST['phone'];
@@ -19,6 +19,7 @@ $address2 = $_POST['address2'];
 $city = $_POST['city'];
 $state = $_POST['state'];
 $zip_code = $_POST['zip_code'];
+$id = $_GET['id'];
 
 //sanatize data
 $email = htmlspecialchars($email);
@@ -31,35 +32,13 @@ $city = htmlspecialchars($city);
 $state = htmlspecialchars($state);
 $zip_code = htmlspecialchars($zip_code);
 
-//check to make sure email is not there
-$sql = "SELECT id FROM persons WHERE email = ?";
-$query = $pdo->prepare($sql);
-$query->execute(Array(
-    $email
-));
-$result = $query->fetch(PDO::FETCH_ASSOC);
-if ($result) {
-    echo("Email <b>".$email."</b> already existed. Try Again!</br>");
-    echo "<a href='display_create_form.php'>Back create form!</a>";
-} else {
 # 3. assign MySQL query code to a variable
-$sql = "INSERT INTO persons (`role`, email, fname, lname, phone, `address`, address2, city, `state`, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "UPDATE persons SET email=?, fname=?, lname=?, phone=?, `address`=?, address2=?, city=?, `state`=?, zip_code=? WHERE id=?";
 $query = $pdo->prepare($sql);
-$query->execute(Array(
-    $role,
-    $email,
-    $fname,
-    $lname,
-    $phone,
-    $address,
-    $address2,
-    $city,
-    $state,
-    $zip_code
-));
+$query->execute(Array($email, $fname, $lname, $phone, $address, $address2, $city, $state, $zip_code ,$id));
 
-# 4. insert the message into the database
+# 4. update the message in the database
 //$pdo->query($sql); # execute the query
-echo "<p>Your info has been added</p><br>";
+echo "<p>Your info has been updated</p><br>";
 echo "<a href='display_list.php'>Back to list</a>";
-}
+include_once "layout_footer.php";

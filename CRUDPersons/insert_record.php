@@ -1,10 +1,14 @@
 <?php
+session_start();
+if(!isset($_SESSION['email'])){
+    header("Location:login.php");
+}
 # This process inserts a record. There is no display.
+include_once "layout_header.php";
 # 1. connect to database
 require '../database/database.php';
 $pdo = Database::connect();
 
-# 2. check valid email
 $email = $_POST['email'];
 $password = $_POST['password'];
 $valPassword = $_POST['valPassword'];
@@ -18,13 +22,19 @@ $city = $_POST['city'];
 $state = $_POST['state'];
 $zip_code = $_POST['zip_code'];
 
+//check to make sure email is not there
+$sql = "SELECT id FROM persons WHERE email = ?";
+$query = $pdo->prepare($sql);
+$query->execute(Array($email));
+$result = $query->fetch(PDO::FETCH_ASSOC);
+
 if(empty($email)||empty($password)||empty($valPassword)||empty($role)||
    empty($fname)||empty($lname)||empty($phone)||empty($address)||
    empty($address2)||empty($city)||empty($state)||empty($zip_code)){
-    header("Location:register.php?err=empty");
+    header("Location:display_create_form.php?err=empty");
 }
 else if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
-    header("Location:register.php?err=invalidEmail");
+    header("Location:display_create_form.php?err=invalidEmail");
 } 
 else {
     //check to make sure email is not there
@@ -35,7 +45,7 @@ else {
     ));
     $result = $query->fetch(PDO::FETCH_ASSOC);
     if ($result) {
-        header("Location:register.php?err=existEmail" . "&email=". $email);
+        header("Location:display_create_form.php?err=existEmail" . "&email=". $email);
     } else {
         // Validate password strength
         $uppercase = preg_match('@[A-Z]@', $password);
@@ -44,9 +54,9 @@ else {
         $specialChars = preg_match('@[^\w]@', $password);
         $validatePass = strcmp($password, $valPassword);
         if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 16) {
-           header("Location:register.php?err=passRequ");
+           header("Location:display_create_form.php?err=passRequ");
         } else if ($validatePass != 0) {
-            header("Location:register.php?err=passVal");
+            header("Location:display_create_form.php?err=passVal");
         } else {
 
             //sanatize data
@@ -82,9 +92,10 @@ else {
             ));
             # 4. insert the message into the database
             //$pdo->query($sql); # execute the query
-            echo "<p>Your info has been added. You can now log in</p><br>";
-            echo "<a href='login.php'>Back to login page</a>";
+            echo "<p>New user has been added</p><br>";
+            echo "<a href='display_list.php'>Back to display list</a>";
         }
     }
 }
-?>
+include_once "layout_footer.php";
+

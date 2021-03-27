@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['email'])){
     header("Location:login.php");
 }
-
+include_once "layout_header.php";
 echo "<h1>Messages List</h1>";
 # connect
 require '../database/database.php';
@@ -48,11 +48,11 @@ echo "<a style='color: green' href='logout.php'>LOGOUT</a> <br> <br>";
 $sql = 'SELECT * FROM persons';
 foreach ($pdo->query($sql) as $row) {
 	$str = "";
-	$str .= "<a href='display_read_form.php?id=" . $row['id'] . "'>Read</a> ";
+	$str .= "<a href='display_read_form.php?id=" . $row['id'] . "'><b>Read</b></a> ";
 	
 	if($role=='admin' || $_SESSION['email'] == $row['email']){
-		$str .= "<a href='display_update_form.php?id=" . $row['id'] . "'>Update</a> ";
-		$str .= "<a href='display_delete_form.php?id=" . $row['id'] . "'>Delete</a> ";
+		$str .= "<a href='display_update_form.php?id=" . $row['id'] ." &role=" . $role . "'><b>Update</b></a> ";
+		$str .= "<a href='display_delete_form.php?id=" . $row['id'] . "'><b>Delete</b></a> ";
 	}
 
     $str .= ' (' . $row['id'] . ') ' . $row['fname'] . " " . $row['lname'] . " - " . $row['email'];
@@ -61,3 +61,4 @@ foreach ($pdo->query($sql) as $row) {
 }
 
 echo '<br />';
+include_once "layout_footer.php";

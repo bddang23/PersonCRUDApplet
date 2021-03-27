@@ -2,7 +2,6 @@
     session_start();//create $_SESSION supergloabal array
    
     $errMsg='';
-    
     //check login credential
     //if this login.php is called using the submit button, check user's imput
     if(isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password'])){
@@ -64,6 +63,8 @@
     <head>
         <title> Crud Applet with Login</title>
         <meta charset="hutf-8" />
+        <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     </head>
     
     <body>

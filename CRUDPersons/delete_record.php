@@ -9,7 +9,7 @@ if(!isset($_SESSION['email'])){
 # 1. connect to database
 require '../database/database.php';
 $pdo = Database::connect();
-
+include_once "layout_header.php";
 # 3. assign MySQL query code to a variable
 $id = $_GET['id'];
 $sql = "DELETE FROM persons WHERE id = ?";
@@ -20,3 +20,4 @@ $query->execute(Array($id));
 //$pdo->query($sql); # execute the query
 echo "<p>Your person has been deleted</p><br>";
 echo "<a href='display_list.php'>Back to list</a>";
+include_once "layout_footer.php";

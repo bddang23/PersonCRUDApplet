@@ -1,6 +1,12 @@
+<?php
+session_start();
+if(!isset($_SESSION['email'])){
+    header("Location:login.php");
+}
+include_once "layout_header.php";
+?>
 
-<h1>Register New User</h1>
-
+<h1>Create/add new person</h1>
 <?php
 error_reporting(0);
 if($_GET['err']=='empty')
@@ -14,8 +20,7 @@ else if($_GET['err']=='passVal')
 else if($_GET['err']=='existEmail')
     echo "<p style='color:red'>Email <b> {$_GET['email']} </b> already exist. Try Again!</p></br>";
 ?>
-    
-<form method='post' action='register_new_user.php'>
+<form method='post' action='insert_record.php'>
     Email: <input name='email' type='text' > </br>
     Password: <input name='password' type='password'> </br>
     Confirm Password: <input name='valPassword' type='password'> </br>
@@ -31,6 +36,8 @@ else if($_GET['err']=='existEmail')
     City: <input name='city' type='text'> </br>
     State: <input name='state' type='text'> </br>
     Zip Code: <input name='zip_code' type='text'> </br></br> 
-    <input type="submit" value="Submit">
+    <input class="btn btn-info" type="submit" value="Submit">
 </form>
-<button onClick="window.location.href='login.php';" value="Return to Login">Return to Login</button>
+<?php
+include_once "layout_footer.php";
+?>

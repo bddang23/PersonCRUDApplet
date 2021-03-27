@@ -6,7 +6,7 @@ if(!isset($_SESSION['email'])){
 # connect
 require '../database/database.php';
 $pdo = Database::connect();
-
+include_once "layout_header.php";
 # put the information for the chosen record into variable $results 
 $id = $_GET['id'];
 $sql = "SELECT * FROM persons WHERE id= ?";
@@ -17,10 +17,13 @@ $result = $query->fetch();
 <h1>Delete <?php echo $result['fname'] . " " . $result['lname'] ;?></h1>
 <h2>Are you sure?</h2>
 <form method='post' action='delete_record.php?id=<?php echo $id ?>'>
-    <input type="submit" value="Yes">
+    <button class="btn btn-info" type="submit" value="Yes">Yes</button>
 </form>
 
 <form method='post' action='display_list.php'>
-    <input type="submit" value="No">
+    <button class="btn btn-danger"type="submit" value="No">No</button>
 </form>
 
+<?php
+include_once "layout_footer.php";
+?>

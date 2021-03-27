@@ -3,6 +3,7 @@ session_start();
 if(!isset($_SESSION['email'])){
     header("Location:login.php");
 }
+include_once "layout_header.php";
 # connect
 require '../database/database.php';
 $pdo = Database::connect();
@@ -27,6 +28,9 @@ $result = $query->fetch();
     City:       <input name='city' type='text' value='<?php echo $result['city'];?>' disabled > </br>
     State:      <input name='state' type='text' value='<?php echo $result['state'];?>' disabled > </br>
     Zip Code:   <input name='zip_code' type='text' value='<?php echo $result['zip_code'];?>' disabled > </br>
-    <input type="submit" value="Return to Display List">
+    <input class="btn btn-info" type="submit" value="Return to Display List">
 </form>
+<?php
+include_once "layout_footer.php";
+?>
 
