@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['email'])){
     header("Location:login.php");
 }
-include_once "layout_header.php";
+
 ?>
 
 <h1>Create/add new person</h1>
@@ -38,6 +38,7 @@ else if($_GET['err']=='existEmail')
     Zip Code: <input name='zip_code' type='text'> </br></br> 
     <input class="btn btn-info" type="submit" value="Submit">
 </form>
+<button onClick="window.location.href='display_list.php';" value="Return to Display List">Return to Display list</button>
 <?php
 include_once "layout_footer.php";
 ?>

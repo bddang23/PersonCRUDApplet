@@ -4,7 +4,7 @@ if(!isset($_SESSION['email'])){
     header("Location:login.php");
 }
 # This process inserts a record. There is no display.
-include_once "layout_header.php";
+
 # 1. connect to database
 require '../database/database.php';
 $pdo = Database::connect();

@@ -1,6 +1,5 @@
-<?php include_once "layout_header.php"; ?>
+<?php include_once "layout_header.php";?>
 <h1>Register New User</h1>
-
 <?php
 error_reporting(0);
 if($_GET['err']=='empty')
@@ -14,7 +13,8 @@ else if($_GET['err']=='passVal')
 else if($_GET['err']=='existEmail')
     echo "<p style='color:red'>Email <b> {$_GET['email']} </b> already exist. Try Again!</p></br>";
 ?>
-    
+
+<p>ALL FIELDS ARE REQUIRED!</p>
 <form method='post' action='register_new_user.php'>
     Email: <input name='email' type='text' > </br>
     Password: <input name='password' type='password'> </br>
@@ -34,4 +34,3 @@ else if($_GET['err']=='existEmail')
     <input class="btn btn-info" type="submit" value="Submit">
 </form>
 <button onClick="window.location.href='login.php';" value="Return to Login">Return to Login</button>
-<?php include_once "layout_footer.php"; ?>

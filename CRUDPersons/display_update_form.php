@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 if(!isset($_SESSION['email'])){
     header("Location:login.php");
@@ -19,7 +20,8 @@ $result = $query->fetch();
 
 <form method='post' action='update_record.php?id=<?php echo $id ?>'>
     Email:      <input name='email' type='text' value='<?php echo $result['email'];?>'> </br>
-    Role:       <?php if($_GET['role'] == 'admin'){
+    Role:       <?php 
+                        if($_GET['role'] == 'admin'){
                         $userSelected=" ";
                         $adminSelected=" ";
                         
@@ -29,8 +31,8 @@ $result = $query->fetch();
                             $adminSelected = 'selected';
                             
                         echo "<select name='role'> \n
-                        <option value='user' $userSelected $adminSelected >User</option> \n
-                        <option value='admin' $userSelected $adminSelected>Admin</option> \n
+                        <option value='user' $userSelected >User</option> \n
+                        <option value='admin' $adminSelected>Admin</option> \n
                         </select> </br>";
                     }
                     else {

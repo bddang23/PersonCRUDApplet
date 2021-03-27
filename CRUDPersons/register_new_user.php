@@ -3,7 +3,6 @@
 # 1. connect to database
 require '../database/database.php';
 $pdo = Database::connect();
-include_once "layout_header.php";
 # 2. check valid email
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -21,7 +20,7 @@ $zip_code = $_POST['zip_code'];
 if(empty($email)||empty($password)||empty($valPassword)||empty($role)||
    empty($fname)||empty($lname)||empty($phone)||empty($address)||
    empty($address2)||empty($city)||empty($state)||empty($zip_code)){
-    header("Location:register.php?err=empty");
+         header("Location:register.php?err=empty");
 }
 else if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
     header("Location:register.php?err=invalidEmail");
@@ -30,9 +29,7 @@ else {
     //check to make sure email is not there
     $sql = "SELECT id FROM persons WHERE email = ?";
     $query = $pdo->prepare($sql);
-    $query->execute(Array(
-        $email
-    ));
+    $query->execute(Array($email));
     $result = $query->fetch(PDO::FETCH_ASSOC);
     if ($result) {
         header("Location:register.php?err=existEmail" . "&email=". $email);
@@ -87,5 +84,5 @@ else {
         }
     }
 }
-include_once "layout_footer.php";
+
 ?>
