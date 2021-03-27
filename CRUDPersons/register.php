@@ -34,3 +34,4 @@ else if($_GET['err']=='existEmail')
     <input class="btn btn-info" type="submit" value="Submit">
 </form>
 <button onClick="window.location.href='login.php';" value="Return to Login">Return to Login</button>
+<?php include_once "layout_footer.php";?>
