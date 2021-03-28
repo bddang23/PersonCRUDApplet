@@ -21,6 +21,17 @@ $city = $_POST['city'];
 $state = $_POST['state'];
 $zip_code = $_POST['zip_code'];
 
+$header= "&email=" . $email
+        ."&role=" . $role
+        ."&fname=" . $fname
+        ."&lname=" . $lname
+        ."&phone=" . $phone
+        ."&address=" . $address
+        ."&address2=" . $address2
+        ."&city=" . $city
+        ."&state=" . $state
+        ."&zip_code=" . $zip_code;
+
 //check to make sure email is not there
 $sql = "SELECT id FROM persons WHERE email = ?";
 $query = $pdo->prepare($sql);
@@ -30,10 +41,10 @@ $result = $query->fetch(PDO::FETCH_ASSOC);
 if(empty($email)||empty($password)||empty($valPassword)||empty($role)||
    empty($fname)||empty($lname)||empty($phone)||empty($address)||
    empty($address2)||empty($city)||empty($state)||empty($zip_code)){
-    header("Location:display_create_form.php?err=empty");
+    header("Location:display_create_form.php?err=empty".$header);
 }
 else if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
-    header("Location:display_create_form.php?err=invalidEmail");
+    header("Location:display_create_form.php?err=invalidEmail".$header);
 } 
 else {
     //check to make sure email is not there
@@ -44,7 +55,7 @@ else {
     ));
     $result = $query->fetch(PDO::FETCH_ASSOC);
     if ($result) {
-        header("Location:display_create_form.php?err=existEmail" . "&email=". $email);
+        header("Location:display_create_form.php?err=existEmail" . "&email=". $email . $header);
     } else {
         // Validate password strength
         $uppercase = preg_match('@[A-Z]@', $password);
@@ -53,9 +64,9 @@ else {
         $specialChars = preg_match('@[^\w]@', $password);
         $validatePass = strcmp($password, $valPassword);
         if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 16) {
-           header("Location:display_create_form.php?err=passRequ");
+           header("Location:display_create_form.php?err=passRequ".$header);
         } else if ($validatePass != 0) {
-            header("Location:display_create_form.php?err=passVal");
+            header("Location:display_create_form.php?err=passVal".$header);
         } else {
 
             //sanatize data
