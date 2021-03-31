@@ -40,7 +40,9 @@ $zip_code = $_POST['zip_code'];
 $id = $_GET['id'];
 if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
     echo '<p>Wrong Email Format!</p><br>';
-    echo "<a href='display_update_form.php'>Back to list</a>";
+    echo "<a href='display_update_form.php?id=" . $_GET['id'] . "'>Back to Update form</a>";
+    include_once "layout_footer.php";
+    exit();
 } else {
     //sanatize data
     $email = htmlspecialchars($email);
@@ -78,6 +80,7 @@ if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{
     //$pdo->query($sql); # execute the query
     echo "<p>Your info has been updated</p><br>";
     echo "<a href='display_list.php'>Back to list</a>";
+    include_once "layout_footer.php";
 }
-include_once "layout_footer.php";
+
 ?>

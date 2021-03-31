@@ -10,5 +10,3 @@
 <body>
     <!-- container -->
     <div class="container">
-     <div class='page-header'>
-            </div>

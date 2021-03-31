@@ -7,7 +7,7 @@ if($_GET['err']=='empty')
 else if($_GET['err']=='invalidEmail')
     echo "<p style='color:red'>Invalid email. Try Again!</p></br>";
 else if($_GET['err']=='passRequ')
-    echo "<p style='color:red'>Try Again! Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.</p></br>";
+    echo "<p style='color:red'>Try Again! Password should be at least 16 characters in length and should include at least one upper case letter, one number, and one special character.</p></br>";
 else if($_GET['err']=='passVal')
     echo "<p style='color:red'>Try Again! Wrong Password Confirmation.</p></br>";
 else if($_GET['err']=='existEmail')
@@ -33,5 +33,5 @@ else if($_GET['err']=='existEmail')
     Zip Code: <input name='zip_code' type='text' placeholder=<?php echo $_GET['zip_code'] ?>> </br></br> 
     <input class="btn btn-info" type="submit" value="Submit">
 </form>
-<button onClick="window.location.href='login.php';" value="Return to Login">Return to Login</button>
+<button class="btn btn-default" onClick="window.location.href='login.php';" value="Return to Login">Return to Login</button>
 <?php include_once "layout_footer.php";?>

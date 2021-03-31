@@ -8,12 +8,45 @@ if(!isset($_SESSION['email'])){
 require '../database/database.php';
 $pdo = Database::connect();
 include_once "layout_header.php";
+
+//find role
+$sql = 'SELECT * FROM persons '
+. " WHERE email = ? "
+. ' LIMIT 1';
+
+$query =$pdo->prepare($sql);
+$query->execute(Array($_SESSION['email']));
+$result = $query->fetch(PDO::FETCH_ASSOC);
+
+if ($result){
+	$role =  $result['role'];
+}
+else{
+	if (strpos($_SESSION['email'], "user", 0)===false){
+			$role="admin";
+	}
+	else{
+			$role="user";
+	}
+}
+
+
+
 # put the information for the chosen record into variable $results 
 $id = $_GET['id'];
 $sql = "SELECT * FROM persons WHERE id= ?";
 $query=$pdo->prepare($sql);
 $query->execute(Array($id));
 $result = $query->fetch();
+
+if($_SESSION['email']!='admin@admin.com' || $role!='admin'){
+    if ($_SESSION['email'] != $result['email']){
+            echo "<p><b>Cannot update other's account!</b></p>";
+            echo "<a href='display_list.php'>Back to list</a>";
+            exit();
+    }
+}
+
 ?>
 
 <h1>Update existing person</h1>
@@ -24,7 +57,7 @@ $result = $query->fetch();
                         $userSelected="";
                         $adminSelected="";
                         
-                    if($_GET['role'] == 'admin' && $result['email'] != $_SESSION['email']){
+                    if($role == 'admin' && $result['email'] != $_SESSION['email']){
                             if ($result['role'] =='user')
                                 $userSelected = "selected";
                             else if ($result['role']=='admin')

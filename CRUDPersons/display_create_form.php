@@ -14,7 +14,7 @@ if($_GET['err']=='empty')
 else if($_GET['err']=='invalidEmail')
     echo "<p style='color:red'>Invalid email. Try Again!</p></br>";
 else if($_GET['err']=='passRequ')
-    echo "<p style='color:red'>Try Again! Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.</p></br>";
+    echo "<p style='color:red'>Try Again! Password should be at least 16 characters in length and should include at least one upper case letter, one number, and one special character.</p></br>";
 else if($_GET['err']=='passVal')
     echo "<p style='color:red'>Try Again! Wrong Password Confirmation.</p></br>";
 else if($_GET['err']=='existEmail')

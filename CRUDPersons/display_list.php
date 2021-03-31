@@ -51,7 +51,7 @@ foreach ($pdo->query($sql) as $row) {
 	$str .= "<a href='display_read_form.php?id=" . $row['id'] . "'><b>Read</b></a> ";
 	
 	if($role=='admin' || $_SESSION['email'] == $row['email'])
-		$str .= "<a href='display_update_form.php?id=" . $row['id'] ."&role=" . $role . "'><b>Update</b></a> ";
+		$str .= "<a href='display_update_form.php?id=" . $row['id'] . "'><b>Update</b></a> ";
 	if($role=='admin')
 		$str .= "<a href='display_delete_form.php?id=" . $row['id'] . "'><b>Delete</b></a> ";
 
