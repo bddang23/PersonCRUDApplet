@@ -38,41 +38,46 @@ $city = $_POST['city'];
 $state = $_POST['state'];
 $zip_code = $_POST['zip_code'];
 $id = $_GET['id'];
-//sanatize data
-$email = htmlspecialchars($email);
-$fname = htmlspecialchars($fname);
-$lname = htmlspecialchars($lname);
-$phone = htmlspecialchars($phone);
-$address = htmlspecialchars($address);
-$address2 = htmlspecialchars($address2);
-$city = htmlspecialchars($city);
-$state = htmlspecialchars($state);
-$zip_code = htmlspecialchars($zip_code);
-$sql = 'SELECT `role` FROM persons ' . " WHERE email = ? " . ' LIMIT 1';
-$query = $pdo->prepare($sql);
-$query->execute(Array(
-    $_SESSION['email']
-));
-$result = $query->fetch(PDO::FETCH_ASSOC);
-# 3. assign MySQL query code to a variable
-$sql = "UPDATE persons SET email=?, role=?, fname=?, lname=?, phone=?, `address`=?, address2=?, city=?, `state`=?, zip_code=? WHERE id=?";
-$query = $pdo->prepare($sql);
-$query->execute(Array(
-    $email,
-    $role,
-    $fname,
-    $lname,
-    $phone,
-    $address,
-    $address2,
-    $city,
-    $state,
-    $zip_code,
-    $id
-));
-# 4. update the message in the database
-//$pdo->query($sql); # execute the query
-echo "<p>Your info has been updated</p><br>";
-echo "<a href='display_list.php'>Back to list</a>";
+if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
+    echo '<p>Wrong Email Format!</p><br>';
+    echo "<a href='display_update_form.php'>Back to list</a>";
+} else {
+    //sanatize data
+    $email = htmlspecialchars($email);
+    $fname = htmlspecialchars($fname);
+    $lname = htmlspecialchars($lname);
+    $phone = htmlspecialchars($phone);
+    $address = htmlspecialchars($address);
+    $address2 = htmlspecialchars($address2);
+    $city = htmlspecialchars($city);
+    $state = htmlspecialchars($state);
+    $zip_code = htmlspecialchars($zip_code);
+    $sql = 'SELECT `role` FROM persons ' . " WHERE email = ? " . ' LIMIT 1';
+    $query = $pdo->prepare($sql);
+    $query->execute(Array(
+        $_SESSION['email']
+    ));
+    $result = $query->fetch(PDO::FETCH_ASSOC);
+    # 3. assign MySQL query code to a variable
+    $sql = "UPDATE persons SET email=?, role=?, fname=?, lname=?, phone=?, `address`=?, address2=?, city=?, `state`=?, zip_code=? WHERE id=?";
+    $query = $pdo->prepare($sql);
+    $query->execute(Array(
+        $email,
+        $role,
+        $fname,
+        $lname,
+        $phone,
+        $address,
+        $address2,
+        $city,
+        $state,
+        $zip_code,
+        $id
+    ));
+    # 4. update the message in the database
+    //$pdo->query($sql); # execute the query
+    echo "<p>Your info has been updated</p><br>";
+    echo "<a href='display_list.php'>Back to list</a>";
+}
 include_once "layout_footer.php";
 ?>
